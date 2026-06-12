@@ -1,43 +1,22 @@
-"use client";
-
-import Link from "next/link";
-import { Building2 } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b fade-in">
+      <div className="max-w-6xl mx-auto flex items-center justify-between p-1">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="bg-blue-600 text-white p-2 rounded-lg">
-            <Building2 size={18} />
-          </div>
-
-          <div className="leading-tight">
-            <h1 className="font-semibold text-gray-900">
-              CosmoBusiness
-            </h1>
-            <p className="text-xs text-gray-500 hidden sm:block">
-              Local services marketplace
-            </p>
-          </div>
-        </Link>
-
-        {/* Right side (optional future buttons) */}
-        <div className="flex items-center gap-3">
-
-          <button className="text-sm text-gray-600 hover:text-gray-900">
-            Explore
-          </button>
-
-          <button className="text-sm bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition">
-            Login
-          </button>
-
+        {/* LOGO + TEXT */}
+        <div className="flex items-center gap-2">
+          <Image
+            src="/CosmoBusinesses.png"
+            alt="CosmoBusiness logo"
+            width={120}
+            height={120}
+            className="rounded-md"
+          />
         </div>
 
       </div>
-    </header>
+    </nav>
   );
 }

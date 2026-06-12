@@ -1,116 +1,188 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, MapPin } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import {
+  Star,
+  MapPin,
+  BadgeCheck,
+} from "lucide-react";
 
-export default function BusinessCard({ business, index = 0 }: any) {
+export default function BusinessCard({
+  business,
+  index = 0,
+}: any) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{
-        duration: 0.6,
+        duration: 0.5,
         delay: index * 0.08,
-        ease: "easeOut",
       }}
-      whileHover={{
-        y: -8,
-        scale: 1.01,
-        transition: { duration: 0.2 },
-      }}
-      className="
-        bg-white
-        border border-gray-100
-        rounded-2xl
-        overflow-hidden
-        shadow-sm
-        hover:shadow-xl
-        transition-all
-        duration-300
-      "
     >
       <Link href={`/business/${business.id}`}>
+        <div
+          className="
+            group
+            bg-white/80
+            backdrop-blur-xl
+            rounded-3xl
+            overflow-hidden
+            border
+            border-white/50
+            shadow-lg
+            hover:shadow-2xl
+            hover:-translate-y-2
+            transition-all
+            duration-500
+          "
+        >
+          {/* IMAGE */}
 
-        {/* IMAGE */}
-        <div className="relative w-full h-48 overflow-hidden">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.4 }}
-            className="w-full h-full"
-          >
+          <div className="relative overflow-hidden h-60">
+
             <Image
               src={business.images[0]}
               alt={business.name}
               fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="
+                object-cover
+                transition-transform
+                duration-700
+                group-hover:scale-110
+              "
+              sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
               priority={index === 0}
             />
-          </motion.div>
-        </div>
 
-        {/* CONTENT */}
-        <div className="p-4">
+            {/* Category */}
 
-          <div className="flex justify-between items-start">
-
-            <div>
-              <motion.p
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="text-xs text-blue-600 font-medium"
-              >
-                {business.category}
-              </motion.p>
-
-              <h2 className="text-lg font-semibold text-gray-900 mt-1">
-                {business.name}
-              </h2>
+            <div
+              className="
+                absolute
+                top-4
+                left-4
+                bg-white/90
+                backdrop-blur
+                px-4
+                py-2
+                rounded-full
+                shadow-md
+                text-xs
+                font-semibold
+                text-violet-700
+              "
+            >
+              {business.category}
             </div>
 
-            <div className="flex items-center gap-1 text-sm text-gray-700">
-              <Star size={14} className="text-yellow-500" />
-              {business.rating}
+            {/* Rating */}
+
+            <div
+              className="
+                absolute
+                top-4
+                right-4
+                bg-black/80
+                text-white
+                px-3
+                py-2
+                rounded-full
+                flex
+                items-center
+                gap-1
+              "
+            >
+              <Star
+                size={14}
+                className="fill-yellow-400 text-yellow-400"
+              />
+
+              <span className="text-sm font-medium">
+                {business.rating}
+              </span>
             </div>
 
+            {/* Verified */}
+
+            <div
+              className="
+                absolute
+                bottom-3
+                right-3
+                px-3
+                py-1.5
+                rounded-full
+                text-xs
+                font-medium
+                border
+                bg-green-50
+                border-green-200
+                text-green-700
+                flex
+                items-center
+                gap-1
+              "
+            >
+              <BadgeCheck size={12} />
+              Verified
+            </div>
           </div>
 
-          {/* LOCATION */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: index * 0.12 }}
-            className="flex items-center gap-1 text-gray-500 text-sm mt-2"
-          >
-            <MapPin size={14} />
-            {business.location}
-          </motion.div>
+          {/* CONTENT */}
 
-          {/* BUTTON */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="mt-4"
-          >
-            <div className="
-              text-center
-              bg-gray-900
-              text-white
-              text-sm
-              py-2
-              rounded-xl
-              hover:bg-gray-800
-              transition
-            ">
-              View Business
+          <div className="p-5">
+
+            <h3 className="font-bold text-lg line-clamp-1">
+              {business.name}
+            </h3>
+
+            <div className="flex items-center gap-1 mt-2 text-gray-500">
+              <MapPin size={15} />
+
+              <span className="text-sm">
+                {business.location}
+              </span>
             </div>
-          </motion.div>
 
+            {/* Description */}
+
+            <p className="mt-4 text-sm text-gray-600 line-clamp-2">
+              {business.description}
+            </p>
+
+            {/* Footer */}
+
+            <div
+              className="
+                flex
+                items-center
+                justify-between
+                mt-5
+                pt-4
+                border-t
+              "
+            >
+              <span className="text-sm text-gray-500">
+                {business.reviewCount ?? 0} reviews
+              </span>
+
+              <span
+                className="
+                  text-violet-600
+                  font-semibold
+                  group-hover:translate-x-1
+                  transition-transform
+                "
+              >
+                View →
+              </span>
+            </div>
+          </div>
         </div>
-
       </Link>
     </motion.div>
   );

@@ -1,5 +1,16 @@
 export const businesses = [
   {
+    id: "15",
+    name: "Golden Nails Studio",
+    category: "Beauty",
+    rating: 4.9,
+    location: "Extension 3",
+    description: "Nail art and beauty treatments.",
+    images: [
+      "https://images.unsplash.com/photo-1596462502278-27bfdc403348",
+    ],
+  },
+  {
     id: "1",
     name: "Cosmo Print Hub",
     category: "Printing",
@@ -153,17 +164,6 @@ export const businesses = [
     description: "Private security and guarding services.",
     images: [
       "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952",
-    ],
-  },
-  {
-    id: "15",
-    name: "Golden Nails Studio",
-    category: "Beauty",
-    rating: 4.9,
-    location: "Extension 3",
-    description: "Nail art and beauty treatments.",
-    images: [
-      "https://images.unsplash.com/photo-1596462502278-27bfdc403348",
     ],
   },
 ];

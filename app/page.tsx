@@ -1,6 +1,8 @@
 "use client";
 
 import BusinessCard from "./components/BusinessCard";
+import Footer from "./components/Footer";
+import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import { businesses } from "./data/businesses";
 
@@ -10,8 +12,10 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#fafafa]">
        <Navbar />
+
+       <Hero />
       {/* Container */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-4">
 
         {/* Header */}
         <div className="mb-8">
@@ -38,6 +42,7 @@ export default function HomePage() {
         </div>
 
       </div>
+      <Footer />
     </main>
   );
 }
