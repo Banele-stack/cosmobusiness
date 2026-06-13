@@ -113,8 +113,8 @@ export default function BusinessPage() {
     : null;
 
   // 👉 PHONE + WHATSAPP
-  const phoneNumber = "+2723255319";
-  const whatsappNumber = "+2723255319";
+  const phoneNumber = "+27723255319";
+  const whatsappNumber = "+27723255319";
 
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=Hi%20I%20want%20to%20enquire%20about%20your%20services`;
 
