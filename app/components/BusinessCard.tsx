@@ -22,7 +22,6 @@ export default function BusinessCard({
   const today = days[new Date().getDay()];
   const todayHours = business.operatingHours?.[today];
 
-  // 👉 Get current time in HH:mm (local device time = South Africa time for your user)
   const now = new Date();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
@@ -38,8 +37,17 @@ export default function BusinessCard({
     const openMinutes = timeToMinutes(open);
     const closeMinutes = timeToMinutes(close);
 
-    isOpen = currentMinutes >= openMinutes && currentMinutes <= closeMinutes;
+    isOpen =
+      currentMinutes >= openMinutes &&
+      currentMinutes <= closeMinutes;
   }
+
+  const images = business.images?.length
+    ? business.images
+    : ["/placeholder.jpg"];
+
+  const previewImages = images.slice(0, 4);
+  const extraCount = images.length - 4;
 
   return (
     <motion.div
@@ -54,30 +62,49 @@ export default function BusinessCard({
       <Link href={`/business/${business.id}`}>
         <div className="group bg-white/80 backdrop-blur-xl rounded-3xl overflow-hidden border-white/50 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
 
-          {/* IMAGE */}
-          <div className="relative overflow-hidden h-60">
-            <Image
-              src={business.images[0]}
-              alt={business.name}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-              sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
-              priority={index === 0}
-            />
+          {/* IMAGE GRID */}
+          <div className="relative h-60 grid grid-cols-2 grid-rows-2 gap-1 overflow-hidden">
+
+            {previewImages.map((img: string, i: number) => {
+              const isLast = i === 3 && extraCount > 0;
+
+              return (
+                <div key={i} className="relative w-full h-full overflow-hidden">
+
+                  <Image
+                    src={img}
+                    alt={`${business.name} ${i + 1}`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
+                    priority={index === 0 && i === 0}
+                  />
+
+                  {/* DARK OVERLAY FOR LAST TILE */}
+                  {isLast && (
+                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                      <span className="text-white font-bold text-lg">
+                        +{extraCount}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
 
             {/* Category */}
-            <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-md text-xs font-semibold text-violet-700">
+            <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-md text-xs font-semibold text-violet-700 z-10">
               {business.category}
             </div>
 
             {/* Rating */}
-            <div className="absolute top-4 right-4 bg-black/80 text-white px-3 py-2 rounded-full flex items-center gap-1">
+            <div className="absolute top-4 right-4 bg-black/80 text-white px-3 py-2 rounded-full flex items-center gap-1 z-10">
               <Star size={14} className="fill-yellow-400 text-yellow-400" />
               <span className="text-sm font-medium">{business.rating}</span>
             </div>
 
             {/* Verified */}
-            <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full text-xs font-medium bg-green-50 text-green-700 flex items-center gap-1">
+            <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full text-xs font-medium bg-green-50 text-green-700 flex items-center gap-1 z-10">
               <BadgeCheck size={12} />
               Verified
             </div>
@@ -90,7 +117,6 @@ export default function BusinessCard({
               {business.name}
             </h3>
 
-            {/* LOCATION */}
             <div className="flex items-center gap-1 mt-2 text-gray-500">
               <MapPin size={15} />
               <span className="text-sm">
@@ -98,12 +124,10 @@ export default function BusinessCard({
               </span>
             </div>
 
-            {/* DESCRIPTION */}
             <p className="mt-4 text-sm text-gray-600 line-clamp-2">
               {business.description}
             </p>
 
-            {/* OPENING STATUS */}
             {business.operatingHours && (
               <div className="mt-3 text-xs">
                 <span
@@ -120,7 +144,6 @@ export default function BusinessCard({
               </div>
             )}
 
-            {/* FOOTER (NO BORDER CHANGE — LEFT CLEAN) */}
             <div className="flex items-center justify-between mt-5 pt-4">
               <span className="text-sm text-gray-500">
                 {business.reviewCount ?? 0} reviews

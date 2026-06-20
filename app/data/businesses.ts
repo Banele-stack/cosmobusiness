@@ -14,6 +14,9 @@ export const businesses = [
     description: "Nail art and beauty treatments.",
     images: [
       "https://images.unsplash.com/photo-1596462502278-27bfdc403348",
+      "https://images.unsplash.com/photo-1604654894610-df63bc536371",
+      "https://images.unsplash.com/photo-1610992015732-2449b76344bc",
+      "https://images.unsplash.com/photo-1519014816548-bf5fe059798b",
     ],
     operatingHours: {
       monday: "09:00 - 18:00",
@@ -43,6 +46,9 @@ export const businesses = [
     images: [
       "https://images.unsplash.com/photo-1586281380349-632531db7ed4",
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72",
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
     ],
     operatingHours: {
       monday: "08:00 - 17:00",
@@ -70,6 +76,10 @@ export const businesses = [
     description: "Hair styling, braiding, nails and makeup services.",
     images: [
       "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
+      "https://images.unsplash.com/photo-1562322140-8baeececf3df",
+      "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f",
+      "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
     ],
     operatingHours: {
       monday: "09:00 - 18:00",
@@ -97,6 +107,10 @@ export const businesses = [
     description: "Fast internet, printing and gaming stations.",
     images: [
       "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+      "https://images.unsplash.com/photo-1516321165247-4aa89a48be28",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
     ],
     operatingHours: {
       monday: "08:00 - 22:00",
@@ -124,6 +138,10 @@ export const businesses = [
     description: "Home cooked meals and catering services.",
     images: [
       "https://images.unsplash.com/photo-1551218808-94e220e084d2",
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+      "https://images.unsplash.com/photo-1528605248644-14dd04022da1",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
     ],
     operatingHours: {
       monday: "10:00 - 20:00",
