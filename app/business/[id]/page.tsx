@@ -14,6 +14,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import { businesses } from "@/app/data/businesses";
 import BusinessReviewsSection from "@/app/components/BusinessReviewsSection";
+import { Business, getBusiness } from "@/app/services/business.service";
 
 type DayOfWeek =
   | "monday"
@@ -28,8 +29,10 @@ export default function BusinessPage() {
   const router = useRouter();
   const params = useParams();
 
-  const id = params?.id as string;
-  const business = businesses.find((b) => b.id === id);
+const id = Number(params?.id);
+
+const [business, setBusiness] = useState<Business | null>(null);
+const [loading, setLoading] = useState(true);
 
   const [reportOpen, setReportOpen] = useState(false);
   const [reason, setReason] = useState("Fake business");
@@ -45,24 +48,47 @@ export default function BusinessPage() {
     lng: number;
   } | null>(null);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        setUserLocation({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-        });
-      });
+useEffect(() => {
+  const fetchBusiness = async () => {
+    try {
+      const data = await getBusiness(id);
+      setBusiness(data);
+    } catch (error) {
+      console.error("Failed to fetch business:", error);
+    } finally {
+      setLoading(false);
     }
-  }, []);
+  };
 
-  if (!business) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-gray-500">
-        Business not found
-      </div>
-    );
+  if (!isNaN(id)) {
+    fetchBusiness();
   }
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setUserLocation({
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+      });
+    });
+  }
+}, [id]);
+
+if (loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      Loading...
+    </div>
+  );
+}
+
+if (!business) {
+  return (
+    <div className="min-h-screen flex items-center justify-center text-gray-500">
+      Business not found
+    </div>
+  );
+}
 
   function submitReport() {
     setSuccess(true);
